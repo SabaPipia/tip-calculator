@@ -1,25 +1,21 @@
-import { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { useContext, useState } from "react";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Context, ContextType } from "../../Provider";
 
 export default function TipBox() {
-  const [selectedTip, setSelectedTip] = useState<number>();
-
-  const [customTip, setCustomTip] = useState<string>("");
+  const context = useContext(Context) as ContextType;
 
   const handleCustomTipChange = (text: string) => {
-    setCustomTip(text);
+    context.setCustomTip(text);
   };
 
   const handleCustomTipSubmit = () => {
-    const number = parseFloat(customTip);
-    setSelectedTip(isNaN(number) ? undefined : number);
+    const customTipAsNumber = parseFloat(context.customTip);
+    if (!isNaN(customTipAsNumber)) {
+      context.setSelectedTip(customTipAsNumber);
+    } else {
+      console.log("Invalid custom tip input");
+    }
   };
 
   return (
@@ -29,18 +25,24 @@ export default function TipBox() {
         <Pressable
           style={[
             styles.button,
-            { backgroundColor: selectedTip === 5 ? "#26C2AE" : "#00474B" },
+            {
+              backgroundColor:
+                context.selectedTip === 5 ? "#26C2AE" : "#00474B",
+            },
           ]}
-          onPress={() => setSelectedTip(5)}
+          onPress={() => context.setSelectedTip(5)}
         >
           <Text style={styles.buttonText}>5%</Text>
         </Pressable>
         <Pressable
           style={[
             styles.button,
-            { backgroundColor: selectedTip === 10 ? "#26C2AE" : "#00474B" },
+            {
+              backgroundColor:
+                context.selectedTip === 10 ? "#26C2AE" : "#00474B",
+            },
           ]}
-          onPress={() => setSelectedTip(10)}
+          onPress={() => context.setSelectedTip(10)}
         >
           <Text style={styles.buttonText}>10%</Text>
         </Pressable>
@@ -49,18 +51,24 @@ export default function TipBox() {
         <Pressable
           style={[
             styles.button,
-            { backgroundColor: selectedTip === 15 ? "#26C2AE" : "#00474B" },
+            {
+              backgroundColor:
+                context.selectedTip === 15 ? "#26C2AE" : "#00474B",
+            },
           ]}
-          onPress={() => setSelectedTip(15)}
+          onPress={() => context.setSelectedTip(15)}
         >
           <Text style={styles.buttonText}>15%</Text>
         </Pressable>
         <Pressable
           style={[
             styles.button,
-            { backgroundColor: selectedTip === 25 ? "#26C2AE" : "#00474B" },
+            {
+              backgroundColor:
+                context.selectedTip === 25 ? "#26C2AE" : "#00474B",
+            },
           ]}
-          onPress={() => setSelectedTip(25)}
+          onPress={() => context.setSelectedTip(25)}
         >
           <Text style={styles.buttonText}>25%</Text>
         </Pressable>
@@ -69,9 +77,12 @@ export default function TipBox() {
         <Pressable
           style={[
             styles.button,
-            { backgroundColor: selectedTip === 50 ? "#26C2AE" : "#00474B" },
+            {
+              backgroundColor:
+                context.selectedTip === 50 ? "#26C2AE" : "#00474B",
+            },
           ]}
-          onPress={() => setSelectedTip(50)}
+          onPress={() => context.setSelectedTip(50)}
         >
           <Text style={styles.buttonText}>50%</Text>
         </Pressable>
@@ -82,7 +93,8 @@ export default function TipBox() {
           style={styles.input}
           placeholder="Custom"
           keyboardType="numeric"
-          value={customTip}
+          // defaultValue={context.customTip}
+          // value={context.customTip}
         />
       </View>
     </View>

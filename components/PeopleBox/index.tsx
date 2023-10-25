@@ -1,20 +1,11 @@
-import { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { useContext, useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Context, ContextType } from "../../Provider";
 
 export default function PeopleBox() {
-  const [numberOfPeople, setNumberOfPeople] = useState(1);
-
-  const handleCustomTipSubmit = (number: number) => {
-    // setNumberOfPeople(number);
-    console.log(number);
+  const context = useContext(Context) as ContextType;
+  const handleCustomTipSubmit = (number: any) => {
+    context.setNumberOfPeople(number);
   };
   return (
     <View style={styles.container}>
@@ -24,9 +15,9 @@ export default function PeopleBox() {
         placeholder="Number of People"
         keyboardType="numeric"
         returnKeyType="done"
-        onSubmitEditing={(e: any) =>
-          handleCustomTipSubmit(Number(e.target.value))
-        }
+        // value={context.numberOfPeople}
+        // defaultValue={context.numberOfPeople}
+        onChangeText={(text) => handleCustomTipSubmit(text)}
       />
     </View>
   );

@@ -1,57 +1,56 @@
-import { StatusBar } from "expo-status-bar";
+import React from "react";
 import {
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { ContextProvider } from "./Provider";
 import BillBox from "./components/BillBox";
 import TipBox from "./components/TipBox";
 import PeopleBox from "./components/PeopleBox";
 import TotalBox from "./components/TotalBox";
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      style={{ flex: 1 }}
-    >
-      <ScrollView>
-        <View style={styles.container}>
-          <StatusBar style="auto" />
-          <Text style={styles.text}>SPLITTER</Text>
-          <View
-            style={[
-              styles.mainContainer,
-              { marginTop: Platform.OS == "ios" ? 80 : 15 },
-            ]}
-          >
-            <BillBox />
-            <TipBox />
-            <PeopleBox />
-            <TotalBox />
+    <ContextProvider>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ flex: 1 }}
+      >
+        <ScrollView>
+          <View style={styles.container}>
+            <Text style={styles.text}>SPLITTER</Text>
+            <View
+              style={[
+                styles.mainContainer,
+                { marginTop: Platform.OS == "ios" ? 80 : 15 },
+              ]}
+            >
+              <BillBox />
+              <TipBox />
+              <PeopleBox />
+              <TotalBox />
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </ContextProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#C5E4E7",
     alignItems: "center",
     justifyContent: "center",
   },
   mainContainer: {
-    flex: 1,
     width: "100%",
     backgroundColor: "#fff",
+    flex: 2,
     padding: 25,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
@@ -61,3 +60,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
+
+export default App;

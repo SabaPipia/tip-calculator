@@ -1,13 +1,22 @@
-import {
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { useContext } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Context, ContextType } from "../../Provider";
 
 export default function TotalBox() {
+  const context = useContext(Context) as ContextType;
+  const tipAmountPerPerson =
+    context.selectedTip && context.totalBill && context.numberOfPeople
+      ? ((context.selectedTip / 100) * Number(context.totalBill)) /
+        context.numberOfPeople
+      : 0.0;
+
+  // Calculate the total amount per person
+  const amountPerPerson =
+    context.totalBill && context.selectedTip && context.numberOfPeople
+      ? (Number(context.totalBill) +
+          (context.selectedTip / 100) * Number(context.totalBill)) /
+        context.numberOfPeople
+      : 0.0;
   return (
     <View style={styles.container}>
       <View style={styles.tip}>
@@ -21,14 +30,14 @@ export default function TotalBox() {
         </View>
         <View>
           <Text style={{ fontSize: 32, color: "#26C2AE", fontWeight: "700" }}>
-            $4.27
+            ${tipAmountPerPerson.toFixed(2)}
           </Text>
         </View>
       </View>
       <View style={styles.total}>
         <View style={styles.inner}>
           <Text style={{ fontSize: 18, color: "#fff", fontWeight: "700" }}>
-            Tip Amount
+            Total
           </Text>
           <Text style={{ fontSize: 16, color: "#999", fontWeight: "700" }}>
             / person
@@ -36,7 +45,7 @@ export default function TotalBox() {
         </View>
         <View>
           <Text style={{ fontSize: 32, color: "#26C2AE", fontWeight: "700" }}>
-            $32.79
+            ${amountPerPerson}
           </Text>
         </View>
       </View>
