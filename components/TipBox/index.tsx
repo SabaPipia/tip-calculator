@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { Context, ContextType } from "../../Provider";
 
@@ -93,8 +93,6 @@ export default function TipBox() {
           style={styles.input}
           placeholder="Custom"
           keyboardType="numeric"
-          // defaultValue={context.customTip}
-          // value={context.customTip}
         />
       </View>
     </View>

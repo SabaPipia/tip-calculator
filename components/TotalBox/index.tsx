@@ -9,7 +9,6 @@ export default function TotalBox() {
       ? ((context.selectedTip / 100) * Number(context.totalBill)) /
         context.numberOfPeople
       : 0.0;
-
   // Calculate the total amount per person
   const amountPerPerson =
     context.totalBill && context.selectedTip && context.numberOfPeople

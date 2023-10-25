@@ -12,7 +12,6 @@ export default function BillBox() {
         <TextInput
           style={styles.input}
           onChangeText={(text: string) => context.setTotalBill(text)}
-          // defaultValue={context.totalBill}
           placeholder="Enter Bill"
           keyboardType="numeric"
         />

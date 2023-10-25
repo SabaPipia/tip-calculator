@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Context, ContextType } from "../../Provider";
 
@@ -15,8 +15,6 @@ export default function PeopleBox() {
         placeholder="Number of People"
         keyboardType="numeric"
         returnKeyType="done"
-        // value={context.numberOfPeople}
-        // defaultValue={context.numberOfPeople}
         onChangeText={(text) => handleCustomTipSubmit(text)}
       />
     </View>
